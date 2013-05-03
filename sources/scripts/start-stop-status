@@ -5,12 +5,14 @@ JETTY_PID_FILE=/var/packages/Jetty/jetty.pid
 PORT=8081
 case $1 in
 	start)
-		${JAVA_PATH}  -Djetty.port=${PORT} -DSTOP.PORT=8085 -DSTOP.KEY=stopme -jar ${JETTY_PATH}/start.jar etc/jetty-logging.xml &
+		cd ${JETTY_PATH}
+		${JAVA_PATH}  -Djetty.port=${PORT} -DSTOP.PORT=8085 -DSTOP.KEY=stopme -jar start.jar etc/jetty-logging.xml &
 		echo $! > ${JETTY_PID_FILE}
 		exit 0
 	;;
 	stop)
-		${JAVA_PATH}  -DSTOP.PORT=8085 -DSTOP.KEY=stopme -jar ${JETTY_PATH}/start.jar --stop
+		cd ${JETTY_PATH}
+		${JAVA_PATH}  -DSTOP.PORT=8085 -DSTOP.KEY=stopme -jar start.jar --stop
 		rm -f ${JETTY_PID_FILE}
 		exit 0
 	;;
