@@ -1,0 +1,29 @@
+#!/bin/sh
+JAVA_PATH=/var/packages/java7/target/jre/bin/java
+JETTY_PATH=/var/packages/Jetty/target/jetty-distribution-9.0.2.v20130417
+JETTY_PID_FILE=/var/packages/Jetty/jetty.pid
+PORT=8081
+case $1 in
+	start)
+		${JAVA_PATH}  -Djetty.port=${PORT} -DSTOP.PORT=8085 -DSTOP.KEY=stopme -jar ${JETTY_PATH}/start.jar etc/jetty-logging.xml &
+		echo $! > ${JETTY_PID_FILE}
+		exit 0
+	;;
+	stop)
+		${JAVA_PATH}  -DSTOP.PORT=8085 -DSTOP.KEY=stopme -jar ${JETTY_PATH}/start.jar --stop
+		rm -f ${JETTY_PID_FILE}
+		exit 0
+	;;
+	status)
+		if [ -f "${JETTY_PID_FILE}"]
+		then
+			exit 0
+		fi
+		exit 1
+	;;
+	log)
+		echo "${JETTY_PATH}/logs/jetty.log";
+		exit 0
+	;;
+esac
+                                     
