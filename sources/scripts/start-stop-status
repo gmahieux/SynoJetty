@@ -19,9 +19,9 @@ case $1 in
 	status)
 		if [ -f "${JETTY_PID_FILE}"]
 		then
-			exit 0
+			exit 1
 		fi
-		exit 1
+		exit 0
 	;;
 	log)
 		echo "${JETTY_PATH}/logs/jetty.log";
