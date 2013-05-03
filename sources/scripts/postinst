@@ -1,8 +1,10 @@
 #!/bin/sh
-jettyversion=`jetty-distribution-9.0.2.v20130417`
-packagepath=`/var/packages/jetty/target/`
+jettyversion='jetty-distribution-9.0.2.v20130417'
+packagepath='/var/packages/Jetty/target/'
+logfile='/var/packages/Jetty/log.log'
+cd ${SYNOPKG_PKGDEST}
 tar -xvf ${packagepath}${jettyversion}.tar.gz
 mv -f ${packagepath}jetty-deploy.xml ${packagepath}${jettyversion}/etc/jetty-deploy.xml 
-mv -f ${packagepath}jetty-logging.xml ${packagepath}${jettyversion}/etc/jetty-logging.xml 
+mv -f ${packagepath}jetty-logging.xml ${packagepath}${jettyversion}/etc/jetty-logging.xml
 synoshare --add webapps "" /volume1/webapps "" "@administrators" "" 1 0
-exit 0 
+exit 0
