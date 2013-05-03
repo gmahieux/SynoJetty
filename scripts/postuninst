@@ -1,0 +1,3 @@
+#!/bin/sh
+synoshare --del true webapps
+exit 0
